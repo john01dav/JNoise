@@ -43,8 +43,10 @@ public class HeightMap{
         if(isNormalized) return;
 
         int cx, cy;
-        double least = 0, greatest = 0;
+        double least, greatest;
         double multiplyBy;
+
+        least = greatest =  heightData[0][0];
 
         for(cx=0;cx<size;cx++){
             for(cy=0;cy<size;cy++){
@@ -101,11 +103,11 @@ public class HeightMap{
     public BufferedImage makeHeightMapImage(){
         BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_GRAY);
         int cx, cy;
-        float value;
+        int value;
 
         for(cx=0;cx<size;cx++){
             for(cy=0;cy<size;cy++){
-                value = (float) getHeightAt(cx, cy);
+                value = (int) Math.round(getHeightAt(cx, cy) * 255);
                 image.setRGB(cx, cy, new Color(value, value, value).getRGB());
             }
         }
