@@ -44,4 +44,14 @@ public final class MathUtil{
         return i > m ? m : i;
     }
 
+    public static int least(int... ints){
+        int least = ints[0];
+
+        for(int i=1;i<ints.length;i++){
+            if(ints[i] < least) least = ints[i];
+        }
+
+        return least;
+    }
+
 }
