@@ -11,6 +11,8 @@ public abstract class ThreadedTemplate extends NoiseTemplate{
 
     @Override
     public void generate(HeightMap heightMap, int size){
+        initTemplate();
+
         try{
             ThreadPoolExecutor executor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new ArrayBlockingQueue<>(size));
             ArrayList<RowCallable> callableArrayList = new ArrayList<>(size);
@@ -50,6 +52,8 @@ public abstract class ThreadedTemplate extends NoiseTemplate{
             return calculateColumn(column, size);
         }
     }
+
+    public abstract void initTemplate();
 
     public abstract double[] calculateColumn(int column, int size);
 
