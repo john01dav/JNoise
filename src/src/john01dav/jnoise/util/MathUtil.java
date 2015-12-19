@@ -24,4 +24,24 @@ public final class MathUtil{
         return n;
     }
 
+    public static int distanceSquared(int xa, int ya, int xb, int yb){
+        return square(xa - xb) + square(ya - yb);
+    }
+
+    public static int square(int i){
+        return i * i;
+    }
+
+    public static double distance(int xa, int ya, int xb, int yb){
+        return Math.sqrt(distanceSquared(xa, ya, xb, yb));
+    }
+
+    public static double min(double i, double m){
+        return i < m ? m : i;
+    }
+
+    public static double max(double i, double m){
+        return i > m ? m : i;
+    }
+
 }
