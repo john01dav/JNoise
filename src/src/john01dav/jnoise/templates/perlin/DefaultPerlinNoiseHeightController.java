@@ -6,12 +6,12 @@ public class DefaultPerlinNoiseHeightController implements PerlinNoiseHeightCont
     public void init(int mapSize){}
 
     @Override
-    public double getHeightMultiplier(int x, int y){
+    public double getHeightMultiplier(int x, int y, int frequency){
         return 1;
     }
 
     @Override
-    public double getHeightAdder(int x, int y){
+    public double getHeightAdder(int x, int y, int frequency){
         return 0;
     }
 

@@ -74,25 +74,25 @@ public class PerlinNoiseTemplate extends AtomicTemplate{
 
         int doubleFrequency = frequency * 2;
 
-        double v1 = noise(intX - frequency, intY - frequency, randomNumberFunctionID);
-        double v2 = noise(intX, intY - frequency, randomNumberFunctionID);
-        double v3 = noise(intX + frequency, intY - frequency, randomNumberFunctionID);
-        double v4 = noise(intX + doubleFrequency, intY - frequency, randomNumberFunctionID);
+        double v1 = noise(intX - frequency, intY - frequency, randomNumberFunctionID, frequency);
+        double v2 = noise(intX, intY - frequency, randomNumberFunctionID, frequency);
+        double v3 = noise(intX + frequency, intY - frequency, randomNumberFunctionID, frequency);
+        double v4 = noise(intX + doubleFrequency, intY - frequency, randomNumberFunctionID, frequency);
 
-        double v5 = noise(intX - frequency, intY, randomNumberFunctionID);
-        double v6 = noise(intX, intY, randomNumberFunctionID);
-        double v7 = noise(intX + frequency, intY, randomNumberFunctionID);
-        double v8 = noise(intX + doubleFrequency, intY, randomNumberFunctionID);
+        double v5 = noise(intX - frequency, intY, randomNumberFunctionID, frequency);
+        double v6 = noise(intX, intY, randomNumberFunctionID, frequency);
+        double v7 = noise(intX + frequency, intY, randomNumberFunctionID, frequency);
+        double v8 = noise(intX + doubleFrequency, intY, randomNumberFunctionID, frequency);
 
-        double v9 = noise(intX - frequency, intY + frequency, randomNumberFunctionID);
-        double v10 = noise(intX, intY + frequency, randomNumberFunctionID);
-        double v11 = noise(intX + frequency, intY + frequency, randomNumberFunctionID);
-        double v12 = noise(intX + doubleFrequency, intY + frequency, randomNumberFunctionID);
+        double v9 = noise(intX - frequency, intY + frequency, randomNumberFunctionID, frequency);
+        double v10 = noise(intX, intY + frequency, randomNumberFunctionID, frequency);
+        double v11 = noise(intX + frequency, intY + frequency, randomNumberFunctionID, frequency);
+        double v12 = noise(intX + doubleFrequency, intY + frequency, randomNumberFunctionID, frequency);
 
-        double v13 = noise(intX - frequency, intY + doubleFrequency, randomNumberFunctionID);
-        double v14 = noise(intX, intY + doubleFrequency, randomNumberFunctionID);
-        double v15 = noise(intX + frequency, intY + doubleFrequency, randomNumberFunctionID);
-        double v16 = noise(intX + doubleFrequency, intY + doubleFrequency, randomNumberFunctionID);
+        double v13 = noise(intX - frequency, intY + doubleFrequency, randomNumberFunctionID, frequency);
+        double v14 = noise(intX, intY + doubleFrequency, randomNumberFunctionID, frequency);
+        double v15 = noise(intX + frequency, intY + doubleFrequency, randomNumberFunctionID, frequency);
+        double v16 = noise(intX + doubleFrequency, intY + doubleFrequency, randomNumberFunctionID, frequency);
 
         double i1 = interpolate(v1, v2, v3, v4, fractionalX);
         double i2 = interpolate(v5, v6, v7, v8, fractionalX);
@@ -110,8 +110,8 @@ public class PerlinNoiseTemplate extends AtomicTemplate{
         return p * Math.pow(x, 3) + q * Math.pow(x, 2) + r * x + v1;
     }
 
-    private double noise(int x, int y, int randomNumberFunctionID){
-        return (noiseFunctions[randomNumberFunctionID].noise(x, y) + heightController.getHeightAdder(x, y)) * heightController.getHeightMultiplier(x, y);
+    private double noise(int x, int y, int randomNumberFunctionID, int frequency){
+        return (noiseFunctions[randomNumberFunctionID].noise(x, y) + heightController.getHeightAdder(x, y, frequency)) * heightController.getHeightMultiplier(x, y, frequency);
     }
 
 }

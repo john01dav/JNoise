@@ -43,7 +43,7 @@ public class ComplexIslandPerlinNoiseController implements PerlinNoiseHeightCont
     }
 
     @Override
-    public double getHeightMultiplier(int x, int y){
+    public double getHeightMultiplier(int x, int y, int frequency){
         double multiplier = 0;
 
         for(IslandNode islandNode : islandNodes){
@@ -63,7 +63,7 @@ public class ComplexIslandPerlinNoiseController implements PerlinNoiseHeightCont
     }
 
     @Override
-    public double getHeightAdder(int x, int y){
+    public double getHeightAdder(int x, int y, int frequency){
         return 1;
     }
 

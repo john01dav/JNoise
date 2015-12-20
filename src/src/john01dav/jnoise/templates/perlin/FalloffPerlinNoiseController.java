@@ -17,7 +17,7 @@ public class FalloffPerlinNoiseController implements PerlinNoiseHeightController
     }
 
     @Override
-    public double getHeightMultiplier(int x, int y){
+    public double getHeightMultiplier(int x, int y, int frequency){
         if(x < 0 || x >= mapSize || y < 0 || y >= mapSize || distanceToEdge(x, y) < paddingSize){
             return 0;
         }else{
@@ -26,7 +26,7 @@ public class FalloffPerlinNoiseController implements PerlinNoiseHeightController
     }
 
     @Override
-    public double getHeightAdder(int x, int y){
+    public double getHeightAdder(int x, int y, int frequency){
         return 1;
     }
 
