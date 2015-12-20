@@ -1,15 +1,9 @@
 package src.john01dav.jnoise.templates.perlin;
 
-import src.john01dav.jnoise.util.Coordinates;
 import src.john01dav.jnoise.util.MathUtil;
 
 public class FalloffPerlinNoiseController implements PerlinNoiseHeightController{
-    private int paddingSize;
     private int mapSize;
-
-    public FalloffPerlinNoiseController(int paddingSize){
-        this.paddingSize = paddingSize;
-    }
 
     @Override
     public void init(int mapSize){
@@ -18,7 +12,7 @@ public class FalloffPerlinNoiseController implements PerlinNoiseHeightController
 
     @Override
     public double getHeightMultiplier(int x, int y, int frequency){
-        if(x < 0 || x >= mapSize || y < 0 || y >= mapSize || distanceToEdge(x, y) < paddingSize){
+        if(x < 0 || x >= mapSize || y < 0 || y >= mapSize || distanceToEdge(x, y) < frequency){
             return 0;
         }else{
             return 1;

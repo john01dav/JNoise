@@ -10,7 +10,7 @@ import java.io.IOException;
 public class FalloffPerlinNoiseTest{
 
     public static void main(String[] args) throws IOException{
-        HeightMap heightMap = new HeightMap(4096, new PerlinNoiseTemplate(0L, 9, 2, new FalloffPerlinNoiseController(512)));
+        HeightMap heightMap = new HeightMap(2048, new PerlinNoiseTemplate(0L, 9, 2, new FalloffPerlinNoiseController()));
         heightMap.generate();
         heightMap.saveImage("./falloffislandperlinnoise.png");
     }
