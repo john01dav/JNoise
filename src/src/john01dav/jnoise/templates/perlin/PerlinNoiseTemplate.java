@@ -1,31 +1,34 @@
-package src.john01dav.jnoise.templates;
+package src.john01dav.jnoise.templates.perlin;
 
+import src.john01dav.jnoise.templates.AtomicTemplate;
 import src.john01dav.jnoise.util.MathUtil;
 import src.john01dav.jnoise.util.NoiseFunction;
 import src.john01dav.jnoise.util.NoiseFunctionGenerationCallable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.*;
 
 public class PerlinNoiseTemplate extends AtomicTemplate{
     private final long seed;
     private final int octaves;
     private final int octaveIterativeFraction;
+    private final PerlinNoiseHeightController heightController;
     private volatile int startingOctave;
     private volatile NoiseFunction[] noiseFunctions;
 
-    public PerlinNoiseTemplate(long seed, int octaves, int octaveIterativeFraction){
+    public PerlinNoiseTemplate(long seed, int octaves, int octaveIterativeFraction, PerlinNoiseHeightController heightController){
         this.seed = seed;
         this.octaves = octaves;
         this.octaveIterativeFraction = octaveIterativeFraction;
-
+        this.heightController = heightController;
     }
 
     @Override
-    public void initTemplate(){
+    public void initTemplate(int size){
         startingOctave = (int) Math.pow(octaveIterativeFraction, octaves - 1);
+
+        heightController.init(size);
 
         try{
             ThreadPoolExecutor executor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new ArrayBlockingQueue<>(octaves));
@@ -107,8 +110,8 @@ public class PerlinNoiseTemplate extends AtomicTemplate{
         return p * Math.pow(x, 3) + q * Math.pow(x, 2) + r * x + v1;
     }
 
-    private int noise(int x, int y, int randomNumberFunctionID){
-        return noiseFunctions[randomNumberFunctionID].noise(x, y);
+    private double noise(int x, int y, int randomNumberFunctionID){
+        return (noiseFunctions[randomNumberFunctionID].noise(x, y) + heightController.getHeightAdder(x, y)) * heightController.getHeightMultiplier(x, y);
     }
 
 }
