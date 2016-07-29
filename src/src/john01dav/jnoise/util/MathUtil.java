@@ -5,7 +5,9 @@ public final class MathUtil{
     private MathUtil(){}
 
     public static boolean isPrime(int n){
-        for(int i=2;i<n;i++){
+        int sqrtOfN = (int) Math.ceil(Math.sqrt(n));
+
+        for(int i=2;i<sqrtOfN;i++){
             if(n % i == 0){
                 return false;
             }
@@ -15,7 +17,9 @@ public final class MathUtil{
     }
 
     public static int getNextPrime(int n){
-        while(!isPrime(n)) n++;
+        if(n % 2 == 0) n++;
+
+        while(!isPrime(n)) n+=2;
         return n;
     }
 
